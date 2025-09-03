@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section id="home" class="hero-section bg-primary text-white py-5" style="background: url('{{ url_for('static', filename='images/hero-bg.jpg') }}') no-repeat center center/cover; padding-top: 100px !important;">
+        <div class="container py-5">
+            <div class="row align-items-center py-5">
+                <div class="col-lg-7">
+                    <h1 class="display-4 fw-bold">Excel in Maths with Siksha Academy</h1>
+                    <p class="lead">Expert coaching for 9th to 12th standard students by experienced faculty.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#contact" class="btn btn-light btn-lg">Enquire Now</a>
+                        <a href="#courses" class="btn btn-outline-light btn-lg">Our Courses</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="card text-dark">
+                        <div class="card-body p-4">
+                            <h3 class="card-title">Free Demo Class</h3>
+                            <p class="card-text">Experience our teaching methodology with a free demo class.</p>
+                            <form action="{{ url_for('contact') }}" method="POST">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="tel" class="form-control" name="phone" placeholder="Your Phone" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Request Demo</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold">About Siksha Academy</h2>
+                    <p class="lead">Run by Rahul Sir, a passionate mathematics educator with over 10 years of experience.</p>
+                    <p>At Siksha Academy, we believe in building strong foundational concepts in mathematics that help students not only excel in exams but also develop analytical thinking skills for life.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary me-2"></i> Personalized attention</li>
+                        <li><i class="fas fa-check text-primary me-2"></i> Regular assessments</li>
+                        <li><i class="fas fa-check text-primary me-2"></i> Doubt clearing sessions</li>
+                        <li><i class="fas fa-check text-primary me-2"></i> Comprehensive study material</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Maths Coaching" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center display-5 fw-bold mb-5">Our Courses</h2>
+            <div class="row">
+                {% for section in sections %}
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        {% if section.image %}
+                        <img src="{{ url_for('static', filename='images/' + section.image) }}" class="card-img-top" alt="{{ section.title }}">
+                        
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ section.title }}</h5>
+                            <p class="card-text">{{ section.description[:100] }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">{{ section.grade }}</span>
+                                <a href="#contact" class="btn btn-sm btn-outline-primary">Enquire Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers" class="py-5">
+        <div class="container">
+            <h2 class="text-center display-5 fw-bold mb-5">Our Faculty</h2>
+            <div class="row">
+                {% for teacher in teachers %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        {% if teacher.image %}
+                        <img src="{{ url_for('static', filename='images/' + teacher.image) }}" class="card-img-top" alt="{{ teacher.name }}">
+                        {% else %}
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="{{ teacher.name }}">
+                        {% endif %}
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ teacher.name }}</h5>
+                            
+                            <p class="card-text">{{ teacher.qualification }}</p>
+                            <p class="card-text">{{ teacher.experience }}years of experience</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center display-5 fw-bold mb-5">Contact Us</h2>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="card-title mb-4">Send us a message</h3>
+                            <form action="{{ url_for('contact') }}" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Your Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Your Phone</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="card-title mb-4">Contact Information</h3>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                    <strong>Address:</strong> 123 Education Street, Learning City
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-phone text-primary me-2"></i>
+                                    <strong>Phone:</strong> +91 9935771794
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-envelope text-primary me-2"></i>
+                                    <strong>Email:</strong> info@sikshaacademy.com
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fab fa-whatsapp text-success me-2"></i>
+                                    <strong>WhatsApp:</strong> 
+                                    <a href="https://wa.me/+919936585300" target="_blank">+91 9936585300</a>
+                                </li>
+                            </ul>
+                            <div class="mt-4">
+                                <h5>Business Hours</h5>
+                                <p class="mb-1">Monday - Friday: 9:00 AM - 7:00 PM</p>
+                                <p class="mb-1">Saturday: 9:00 AM - 5:00 PM</p>
+                                <p>Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

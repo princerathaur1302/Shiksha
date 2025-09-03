@@ -1,0 +1,120 @@
+/* Custom CSS for Siksha Academy */
+
+/* Global Styles */
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+padding-top: 76px;
+}
+
+.hero-section {
+padding: 120px 0 80px;
+position: relative;
+}
+
+.hero-section::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.6);
+z-index: 1;
+}
+
+.hero-section > .container {
+position: relative;
+z-index: 2;
+}
+
+/* Card hover effects */
+.card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Section spacing */
+section {
+padding: 80px 0;
+}
+
+section:nth-child(even) {
+background-color: #f8f9fa;
+}
+
+/* Navbar styling */
+.navbar-brand {
+font-weight: 700;
+}
+
+.navbar-brand img {
+margin-right: 10px;
+}
+
+/* Button styling */
+.btn {
+border-radius: 6px;
+font-weight: 500;
+}
+
+.btn-lg {
+padding: 12px 24px;
+}
+
+/* Form styling */
+.form-control, .form-select {
+border-radius: 6px;
+padding: 12px;
+}
+
+.form-control:focus, .form-select:focus {
+box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Table styling */
+.table th {
+border-top: none;
+font-weight: 600;
+color: #495057;
+}
+
+/* Badge styling */
+.badge {
+font-weight: 500;
+padding: 6px 10px;
+border-radius: 20px;
+}
+
+/* Footer styling */
+footer a {
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+footer a:hover {
+color: #20c997 !important;
+}
+
+/* Custom utilities */
+.rounded-top-left-0 {
+border-top-left-radius: 0 !important;
+}
+
+.rounded-top-right-0 {
+border-top-right-radius: 0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+.display-4 {
+font-size: 2.5rem;
+}
+
+.hero-section { padding: 100px 0 60px; text-align: center; } section { padding: 60px 0; } 
+
+}
+

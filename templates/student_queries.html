@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Student Queries</h2>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for query in queries %}
+                        <tr>
+                            <td>{{ query.student_name }}</td>
+                            <td>{{ query.email }}</td>
+                            <td>{{ query.phone }}</td>
+                            <td>{{ query.message[:50] }}...</td>
+                            <td>{{ query.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>
+                                <span class="badge 
+                                    {% if query.status == 'new' %}bg-warning
+                                    {% elif query.status == 'in_progress' %}bg-info
+                                    {% else %}bg-success{% endif %}">
+                                    {{ query.status|replace('_', ' ')|title }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#queryModal{{ query.id }}">View</a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            Status
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{ url_for('update_query_status', id=query.id, status='new') }}">New</a></li>
+                                            <li><a class="dropdown-item" href="{{ url_for('update_query_status', id=query.id, status='in_progress') }}">In Progress</a></li>
+                                            <li><a class="dropdown-item" href="{{ url_for('update_query_status', id=query.id, status='resolved') }}">Resolved</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="queryModal{{ query.id }}" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Query Details</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><strong>Name:</strong> {{ query.student_name }}</p>
+                                                <p><strong>Email:</strong> {{ query.email }}</p>
+                                                <p><strong>Phone:</strong> {{ query.phone }}</p>
+                                                <p><strong>Date:</strong> {{ query.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                                                <p><strong>Status:</strong> 
+                                                    <span class="badge 
+                                                        {% if query.status == 'new' %}bg-warning
+                                                        {% elif query.status == 'in_progress' %}bg-info
+                                                        {% else %}bg-success{% endif %}">
+                                                        {{ query.status|replace('_', ' ')|title }}
+                                                    </span>
+                                                </p>
+                                                <p><strong>Message:</strong></p>
+                                                <p>{{ query.message }}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
