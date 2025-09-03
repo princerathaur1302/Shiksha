@@ -28,9 +28,9 @@ def load_user(user_id):
 with app.app_context():
     db.create_all()
     # Create admin user if not exists
-    if not User.query.filter_by(username='admin').first():
-        admin = User(username='admin', email='admin@siksha.com', role='admin')
-        admin.set_password('admin123')
+    if not User.query.filter_by(username='rahul59singh').first():
+        admin = User(username='admin', email='princerathaur1302@gmail.com', role='admin')
+        admin.set_password('RSMUW@$&59maths')
         db.session.add(admin)
         db.session.commit()
 
